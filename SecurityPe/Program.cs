@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
+using SecurityPe.Data;
 
 namespace SecurityPe
 {
@@ -15,8 +16,8 @@ namespace SecurityPe
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            
-            
+            var context = new ChatAppContext();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

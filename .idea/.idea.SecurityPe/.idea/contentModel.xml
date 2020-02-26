@@ -5,18 +5,25 @@
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_SecurityPe.678284025.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="SecurityPe" t="IncludeRecursive">
+        <e p="Controllers" t="Include">
+          <e p="ConversationController.cs" t="Include" />
+        </e>
         <e p="Data" t="Include">
           <e p="ChatAppContext.cs" t="Include" />
+          <e p="TempData.cs" t="Include" />
         </e>
         <e p="Domain" t="Include">
+          <e p="Conversation.cs" t="Include" />
           <e p="User.cs" t="Include" />
         </e>
+        <e p="Models" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="SecurityPe.csproj" t="IncludeRecursive" />
         <e p="Startup.cs" t="Include" />
+        <e p="View" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />

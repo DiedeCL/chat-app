@@ -26,15 +26,14 @@ namespace SecurityPe
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseDefaultFiles();  // zo dat de / naar /index.html verwijst
-            app.UseStaticFiles(); // zo dat de files van wwwroot ingelezen kunnen worden dus url/naamvandefile.html
+            /*app.UseDefaultFiles();  // zo dat de / naar /index.html verwijst
+            app.UseStaticFiles(); // zo dat de files van wwwroot ingelezen kunnen worden dus url/naamvandefile.html*/
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
 
-                // endpoints.MapGet("/", async context => { await context.Response });
+                endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}"); 
             });
         }
     }

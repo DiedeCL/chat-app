@@ -7,26 +7,29 @@ namespace SecurityPe.Data
 {
     public class TempData
     {
-        private List<User> _Users;
-        private List<Conversation> _Conversations;
+        private List<User> _Users = new List<User>();
+        private List<Conversation> _Conversations =new List<Conversation>();
 
         
         public TempData()
         {
-            _Users = new List<User>();
-            _Conversations = new List<Conversation>();
+            
             var messages = new List<String>();
             messages.Add("Hello Bogaert");
             messages.Add("Hello Boris");
             messages.Add("Alles ok?");
+            var userIds = new List<int>();
+            userIds.Add(1);
+            userIds.Add(2);
             var conversation = new Conversation
             {
                 Id = 0,
                 Messages = messages,
-                Users = _Users.GetRange(0,2)
+                UserIds = userIds
+                
             };
-            var conversations = new List<Conversation>();
-            conversations.Add(conversation);
+            var conversationIds = new List<int>();
+            conversationIds.Add(conversation.Id);
             _Conversations.Add(conversation);
             var bogaert = new User
             {
@@ -34,7 +37,7 @@ namespace SecurityPe.Data
                 Name = "Bogaert",
                 Email = "bogaert@gmail.com",
                 Password = "12345",
-                Conversations = conversations
+                ConversationIds =  conversationIds
                 
             };
             var boris = new User
@@ -43,7 +46,7 @@ namespace SecurityPe.Data
                 Name = "Boris",
                 Email = "boris@gmail.com",
                 Password = "12345",
-                Conversations = conversations
+                ConversationIds = conversationIds
             };
             _Users.Add(bogaert);
             _Users.Add(boris);

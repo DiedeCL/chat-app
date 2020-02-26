@@ -8,6 +8,6 @@ namespace SecurityPe.Domain
     {
         public int Id { get; set; }
         public List<string> Messages { get; set; }
-        public List<User> Users { get; set; }
+        public List<int> UserIds { get; set; }
     }
 }

@@ -5241,7 +5241,7 @@
       "outputPath": "/home/diede/RiderProjects/SecurityPe/SecurityPe/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/diede/.config/NuGet/NuGet.Config"
+        "/home/diede/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

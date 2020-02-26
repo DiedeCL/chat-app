@@ -23,7 +23,7 @@ namespace SecurityPe.Data
             modelBuilder.Entity<User>().Property(u => u.Email).IsRequired();
             modelBuilder.Entity<User>().Property(u => u.Password).IsRequired();
             
-            modelBuilder.Entity<Conversation>().Property(c => c.Users).IsRequired();
+            modelBuilder.Entity<Conversation>().Property(c => c.UserIds).IsRequired();
             modelBuilder.Entity<Conversation>().Property(c => c.Id).IsRequired();
             base.OnModelCreating(modelBuilder);
         }

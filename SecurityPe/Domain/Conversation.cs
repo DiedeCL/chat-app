@@ -7,7 +7,7 @@ namespace SecurityPe.Domain
     public class Conversation
     {
         public int Id { get; set; }
-        public List<string> Messages { get; set; }
-        public List<int> UserIds { get; set; }
+        public IList<Message> Messages { get; set; }
+        public IList<UserConversation> UserConversations { get; set; }
     }
 }

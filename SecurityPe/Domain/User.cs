@@ -9,6 +9,7 @@ namespace SecurityPe.Domain
         public String Name { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
-        public List<int> ConversationIds { get; set; }
+        public IList<UserConversation> UserConversations { get; set; }
+
     }
 }

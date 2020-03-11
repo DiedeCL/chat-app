@@ -15,9 +15,19 @@
         </e>
         <e p="Domain" t="Include">
           <e p="Conversation.cs" t="Include" />
+          <e p="Encryption.cs" t="Include" />
           <e p="Message.cs" t="Include" />
           <e p="User.cs" t="Include" />
           <e p="UserConversation.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20200304150441_initialMigration.Designer.cs" t="Include" />
+          <e p="20200304150441_initialMigration.cs" t="Include" />
+          <e p="20200304151058_migration2.Designer.cs" t="Include" />
+          <e p="20200304151058_migration2.cs" t="Include" />
+          <e p="20200311111707_migration3.Designer.cs" t="Include" />
+          <e p="20200311111707_migration3.cs" t="Include" />
+          <e p="ChatAppContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include" />
         <e p="Program.cs" t="Include" />

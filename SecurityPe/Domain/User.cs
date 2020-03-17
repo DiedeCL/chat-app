@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace SecurityPe.Domain
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public String Name { get; set; }
-        public String Email { get; set; }
-        public String Password { get; set; }
         public IList<UserConversation> UserConversations { get; set; }
 
     }

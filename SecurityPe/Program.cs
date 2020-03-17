@@ -16,7 +16,7 @@ namespace SecurityPe
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            var context = new ChatAppContext();
+           
 
         }
 

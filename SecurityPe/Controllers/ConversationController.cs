@@ -10,13 +10,13 @@ namespace SecurityPe.Controllers
 {
     public class ConversationController : Controller
     {
-        ChatAppContext _context = new ChatAppContext();
+        /*//ChatAppContext _context = new ChatAppContext();
         [Route("{action}")]
         public IActionResult Users()
         {
             
-            var json = JsonSerializer.Serialize(_context.Users);
-            return Json(json);
+            // var json = JsonSerializer.Serialize(_context.Users);
+            // return Json(json);
 
         }
         
@@ -24,9 +24,9 @@ namespace SecurityPe.Controllers
         [Route("{action}")]
         public IActionResult Conversations(int id)
         {
-            return Json(JsonSerializer.Serialize(_context.Conversations));
+            // return Json(JsonSerializer.Serialize(_context.Conversations));
 
-        }
+        }*/
         /*[Route("{action}/{id}/{msg}")]
         public IActionResult AddMessage(int id, string msg)
         {

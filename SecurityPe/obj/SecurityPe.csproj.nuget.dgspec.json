@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/diede/RiderProjects/SecurityPe/SecurityPe/SecurityPe.csproj": {}
+    "C:\\Users\\diede\\Documents\\School\\Security\\SecurityPE\\SecurityPe\\SecurityPe.csproj": {}
   },
   "projects": {
-    "/home/diede/RiderProjects/SecurityPe/SecurityPe/SecurityPe.csproj": {
+    "C:\\Users\\diede\\Documents\\School\\Security\\SecurityPE\\SecurityPe\\SecurityPe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/diede/RiderProjects/SecurityPe/SecurityPe/SecurityPe.csproj",
+        "projectUniqueName": "C:\\Users\\diede\\Documents\\School\\Security\\SecurityPE\\SecurityPe\\SecurityPe.csproj",
         "projectName": "SecurityPe",
-        "projectPath": "/home/diede/RiderProjects/SecurityPe/SecurityPe/SecurityPe.csproj",
-        "packagesPath": "/home/diede/.nuget/packages/",
-        "outputPath": "/home/diede/RiderProjects/SecurityPe/SecurityPe/obj/",
+        "projectPath": "C:\\Users\\diede\\Documents\\School\\Security\\SecurityPE\\SecurityPe\\SecurityPe.csproj",
+        "packagesPath": "C:\\Users\\diede\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\diede\\Documents\\School\\Security\\SecurityPE\\SecurityPe\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/diede/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\diede\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +45,14 @@
             "Microsoft.AspNet.SignalR": {
               "target": "Package",
               "version": "[2.4.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.2, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -87,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

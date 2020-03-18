@@ -18,7 +18,7 @@ namespace SecurityPe.Controllers
         [Route("{action}")]
         public IActionResult Conversations(int id)
         {
-            return Json(JsonSerializer.Serialize());
+            return Json(JsonSerializer.Serialize(2));
 
         }
     

@@ -1002,6 +1002,9 @@
           "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
         }
       },
+      "Microsoft.NETCore.Jit/1.0.2": {
+        "type": "package"
+      },
       "Microsoft.NETCore.Platforms/2.1.2": {
         "type": "package",
         "compile": {
@@ -1009,6 +1012,48 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
+        }
+      },
+      "Microsoft.NETCore.Portable.Compatibility/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2"
+        },
+        "compile": {
+          "ref/netstandard1.0/System.ComponentModel.DataAnnotations.dll": {},
+          "ref/netstandard1.0/System.Core.dll": {},
+          "ref/netstandard1.0/System.Net.dll": {},
+          "ref/netstandard1.0/System.Numerics.dll": {},
+          "ref/netstandard1.0/System.Runtime.Serialization.dll": {},
+          "ref/netstandard1.0/System.ServiceModel.Web.dll": {},
+          "ref/netstandard1.0/System.ServiceModel.dll": {},
+          "ref/netstandard1.0/System.Windows.dll": {},
+          "ref/netstandard1.0/System.Xml.Linq.dll": {},
+          "ref/netstandard1.0/System.Xml.Serialization.dll": {},
+          "ref/netstandard1.0/System.Xml.dll": {},
+          "ref/netstandard1.0/System.dll": {},
+          "ref/netstandard1.0/mscorlib.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ComponentModel.DataAnnotations.dll": {},
+          "lib/netstandard1.0/System.Core.dll": {},
+          "lib/netstandard1.0/System.Net.dll": {},
+          "lib/netstandard1.0/System.Numerics.dll": {},
+          "lib/netstandard1.0/System.Runtime.Serialization.dll": {},
+          "lib/netstandard1.0/System.ServiceModel.Web.dll": {},
+          "lib/netstandard1.0/System.ServiceModel.dll": {},
+          "lib/netstandard1.0/System.Windows.dll": {},
+          "lib/netstandard1.0/System.Xml.Linq.dll": {},
+          "lib/netstandard1.0/System.Xml.Serialization.dll": {},
+          "lib/netstandard1.0/System.Xml.dll": {},
+          "lib/netstandard1.0/System.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Jit": "1.0.2",
+          "Microsoft.NETCore.Windows.ApiSets": "1.0.1"
         }
       },
       "Microsoft.NETCore.Targets/1.1.0": {
@@ -1019,6 +1064,9 @@
         "runtime": {
           "lib/netstandard1.0/_._": {}
         }
+      },
+      "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
+        "type": "package"
       },
       "Microsoft.VisualStudio.Web.CodeGeneration/3.1.1": {
         "type": "package",
@@ -2953,6 +3001,115 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Virgil.Crypto/2.4.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
+          "Virgil.CryptoAPI": "1.0.2"
+        },
+        "compile": {
+          "lib/netstandard1.1/Virgil.Crypto.dll": {},
+          "lib/netstandard1.1/Virgil.CryptoImpl.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Virgil.Crypto.dll": {},
+          "lib/netstandard1.1/Virgil.CryptoImpl.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "assetType": "runtime",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "assetType": "runtime",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/virgil_crypto_net.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/virgil_crypto_net.so.2": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/virgil_crypto_net.so.2.4.6": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-x64/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "assetType": "runtime",
+            "rid": "osx-x64"
+          },
+          "runtimes/osx-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "assetType": "runtime",
+            "rid": "osx-x64"
+          },
+          "runtimes/osx-x64/native/virgil_crypto_net.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "assetType": "runtime",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "assetType": "runtime",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/virgil_crypto_net.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/virgil_crypto_net.lib": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "assetType": "runtime",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "assetType": "runtime",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/virgil_crypto_net.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/virgil_crypto_net.lib": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "Virgil.CryptoAPI/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/VirgilCryptoAPI.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/VirgilCryptoAPI.dll": {}
+        }
+      },
+      "Virgil.SDK/5.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "Virgil.CryptoAPI": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/Virgil.SDK.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Virgil.SDK.dll": {}
+        },
+        "build": {
+          "build/netstandard1.1/Virgil.SDK.targets": {}
+        }
       }
     }
   },
@@ -4250,6 +4407,20 @@
         "microsoft.net.http.headers.nuspec"
       ]
     },
+    "Microsoft.NETCore.Jit/1.0.2": {
+      "sha512": "Ok2vWofa6X8WD9vc4pfLHwvJz1/B6t3gOAoZcjrjrQf7lQOlNIuZIZtLn3wnWX28DuQGpPJkRlBxFj7Z5txNqw==",
+      "type": "package",
+      "path": "microsoft.netcore.jit/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "microsoft.netcore.jit.1.0.2.nupkg.sha512",
+        "microsoft.netcore.jit.nuspec",
+        "runtime.json"
+      ]
+    },
     "Microsoft.NETCore.Platforms/2.1.2": {
       "sha512": "mOJy3M0UN+LUG21dLGMxaWZEP6xYpQEpLuvuEQBaownaX4YuhH6NmNUlN9si+vNkAS6dwJ//N1O4DmLf2CikVg==",
       "type": "package",
@@ -4267,6 +4438,104 @@
         "version.txt"
       ]
     },
+    "Microsoft.NETCore.Portable.Compatibility/1.0.1": {
+      "sha512": "Vd+lvLcGwvkedxtKn0U8s9uR4p0Lm+0U2QvDsLaw7g4S1W4KfPDbaW+ROhhLCSOx/gMYC72/b+z+o4fqS/oxVg==",
+      "type": "package",
+      "path": "microsoft.netcore.portable.compatibility/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/net45/_._",
+        "lib/netcore50/System.ComponentModel.DataAnnotations.dll",
+        "lib/netcore50/System.Core.dll",
+        "lib/netcore50/System.Net.dll",
+        "lib/netcore50/System.Numerics.dll",
+        "lib/netcore50/System.Runtime.Serialization.dll",
+        "lib/netcore50/System.ServiceModel.Web.dll",
+        "lib/netcore50/System.ServiceModel.dll",
+        "lib/netcore50/System.Windows.dll",
+        "lib/netcore50/System.Xml.Linq.dll",
+        "lib/netcore50/System.Xml.Serialization.dll",
+        "lib/netcore50/System.Xml.dll",
+        "lib/netcore50/System.dll",
+        "lib/netstandard1.0/System.ComponentModel.DataAnnotations.dll",
+        "lib/netstandard1.0/System.Core.dll",
+        "lib/netstandard1.0/System.Net.dll",
+        "lib/netstandard1.0/System.Numerics.dll",
+        "lib/netstandard1.0/System.Runtime.Serialization.dll",
+        "lib/netstandard1.0/System.ServiceModel.Web.dll",
+        "lib/netstandard1.0/System.ServiceModel.dll",
+        "lib/netstandard1.0/System.Windows.dll",
+        "lib/netstandard1.0/System.Xml.Linq.dll",
+        "lib/netstandard1.0/System.Xml.Serialization.dll",
+        "lib/netstandard1.0/System.Xml.dll",
+        "lib/netstandard1.0/System.dll",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "microsoft.netcore.portable.compatibility.1.0.1.nupkg.sha512",
+        "microsoft.netcore.portable.compatibility.nuspec",
+        "ref/net45/_._",
+        "ref/netcore50/System.ComponentModel.DataAnnotations.dll",
+        "ref/netcore50/System.Core.dll",
+        "ref/netcore50/System.Net.dll",
+        "ref/netcore50/System.Numerics.dll",
+        "ref/netcore50/System.Runtime.Serialization.dll",
+        "ref/netcore50/System.ServiceModel.Web.dll",
+        "ref/netcore50/System.ServiceModel.dll",
+        "ref/netcore50/System.Windows.dll",
+        "ref/netcore50/System.Xml.Linq.dll",
+        "ref/netcore50/System.Xml.Serialization.dll",
+        "ref/netcore50/System.Xml.dll",
+        "ref/netcore50/System.dll",
+        "ref/netcore50/mscorlib.dll",
+        "ref/netstandard1.0/System.ComponentModel.DataAnnotations.dll",
+        "ref/netstandard1.0/System.Core.dll",
+        "ref/netstandard1.0/System.Net.dll",
+        "ref/netstandard1.0/System.Numerics.dll",
+        "ref/netstandard1.0/System.Runtime.Serialization.dll",
+        "ref/netstandard1.0/System.ServiceModel.Web.dll",
+        "ref/netstandard1.0/System.ServiceModel.dll",
+        "ref/netstandard1.0/System.Windows.dll",
+        "ref/netstandard1.0/System.Xml.Linq.dll",
+        "ref/netstandard1.0/System.Xml.Serialization.dll",
+        "ref/netstandard1.0/System.Xml.dll",
+        "ref/netstandard1.0/System.dll",
+        "ref/netstandard1.0/mscorlib.dll",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "runtimes/aot/lib/netcore50/System.ComponentModel.DataAnnotations.dll",
+        "runtimes/aot/lib/netcore50/System.Core.dll",
+        "runtimes/aot/lib/netcore50/System.Net.dll",
+        "runtimes/aot/lib/netcore50/System.Numerics.dll",
+        "runtimes/aot/lib/netcore50/System.Runtime.Serialization.dll",
+        "runtimes/aot/lib/netcore50/System.ServiceModel.Web.dll",
+        "runtimes/aot/lib/netcore50/System.ServiceModel.dll",
+        "runtimes/aot/lib/netcore50/System.Windows.dll",
+        "runtimes/aot/lib/netcore50/System.Xml.Linq.dll",
+        "runtimes/aot/lib/netcore50/System.Xml.Serialization.dll",
+        "runtimes/aot/lib/netcore50/System.Xml.dll",
+        "runtimes/aot/lib/netcore50/System.dll",
+        "runtimes/aot/lib/netcore50/mscorlib.dll"
+      ]
+    },
+    "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+      "sha512": "A0x1xtTjYJWZr2DRzgfCOXgB0JkQg8twnmtTJ79wFje+IihlLbXtx6Z2AxyVokBM5ruwTedR6YdCmHk39QJdtQ==",
+      "type": "package",
+      "path": "microsoft.netcore.runtime.coreclr/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "microsoft.netcore.runtime.coreclr.1.0.2.nupkg.sha512",
+        "microsoft.netcore.runtime.coreclr.nuspec",
+        "runtime.json"
+      ]
+    },
     "Microsoft.NETCore.Targets/1.1.0": {
       "sha512": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "type": "package",
@@ -4279,6 +4548,20 @@
         "lib/netstandard1.0/_._",
         "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
+        "runtime.json"
+      ]
+    },
+    "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
+      "sha512": "SaToCvvsGMxTgtLv/BrFQ5IFMPRE1zpWbnqbpwykJa8W5XiX82CXI6K2o7yf5xS7EP6t/JzFLV0SIDuWpvBZVw==",
+      "type": "package",
+      "path": "microsoft.netcore.windows.apisets/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "microsoft.netcore.windows.apisets.1.0.1.nupkg.sha512",
+        "microsoft.netcore.windows.apisets.nuspec",
         "runtime.json"
       ]
     },
@@ -9448,6 +9731,84 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Virgil.Crypto/2.4.10": {
+      "sha512": "LlFZXPxwN8c03pQ3YxA+riZw6AH1BfyftL9li9Kx5Ooq/pmm/k8W43y23hzdZShzqwaMm4VPdq4VeK7UULUvbg==",
+      "type": "package",
+      "path": "virgil.crypto/2.4.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/monoandroid/Virgil.Crypto.targets",
+        "build/native/android/arm64-v8a/libvirgil_crypto_net.so",
+        "build/native/android/armeabi-v7a/libvirgil_crypto_net.so",
+        "build/native/android/x86/libvirgil_crypto_net.so",
+        "build/native/android/x86_64/libvirgil_crypto_net.so",
+        "build/native/ios/libVirgilCryptoNet.a",
+        "build/net45/Virgil.Crypto.targets",
+        "build/xamarinios/Virgil.Crypto.targets",
+        "lib/monoandroid/Virgil.Crypto.dll",
+        "lib/monoandroid/Virgil.CryptoImpl.dll",
+        "lib/net45/Virgil.Crypto.dll",
+        "lib/net45/Virgil.CryptoImpl.dll",
+        "lib/netstandard1.1/Virgil.Crypto.dll",
+        "lib/netstandard1.1/Virgil.CryptoImpl.dll",
+        "lib/xamarinios/Virgil.Crypto.dll",
+        "lib/xamarinios/Virgil.CryptoImpl.dll",
+        "runtimes/linux-x64/lib/netstandard1.1/Virgil.Crypto.dll",
+        "runtimes/linux-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll",
+        "runtimes/linux-x64/native/virgil_crypto_net.so",
+        "runtimes/linux-x64/native/virgil_crypto_net.so.2",
+        "runtimes/linux-x64/native/virgil_crypto_net.so.2.4.6",
+        "runtimes/osx-x64/lib/netstandard1.1/Virgil.Crypto.dll",
+        "runtimes/osx-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll",
+        "runtimes/osx-x64/native/virgil_crypto_net.dylib",
+        "runtimes/win-x64/lib/netstandard1.1/Virgil.Crypto.dll",
+        "runtimes/win-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll",
+        "runtimes/win-x64/native/virgil_crypto_net.dll",
+        "runtimes/win-x64/native/virgil_crypto_net.lib",
+        "runtimes/win-x86/lib/netstandard1.1/Virgil.Crypto.dll",
+        "runtimes/win-x86/lib/netstandard1.1/Virgil.CryptoImpl.dll",
+        "runtimes/win-x86/native/virgil_crypto_net.dll",
+        "runtimes/win-x86/native/virgil_crypto_net.lib",
+        "virgil.crypto.2.4.10.nupkg.sha512",
+        "virgil.crypto.nuspec"
+      ]
+    },
+    "Virgil.CryptoAPI/1.0.2": {
+      "sha512": "rq7oJT9TgoMHV3tkYiIL/bIJxNW/lNkeseZ7X8b+pP83ejIK40nwW0OGUviIlIrydYlAJTNvwHI/6Wtk21oXLg==",
+      "type": "package",
+      "path": "virgil.cryptoapi/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/VirgilCryptoAPI.dll",
+        "lib/netstandard1.1/VirgilCryptoAPI.dll",
+        "virgil.cryptoapi.1.0.2.nupkg.sha512",
+        "virgil.cryptoapi.nuspec"
+      ]
+    },
+    "Virgil.SDK/5.0.6": {
+      "sha512": "0RnQEK8Bpm/oPzeDxHEO32yi81PQpCgUC+cK4n+BusP4j+qbhXWkpydUy173BaQWlZQR/sdQI1vvBBXA3sfcTg==",
+      "type": "package",
+      "path": "virgil.sdk/5.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/monoandroid/Virgil.SDK.targets",
+        "build/netstandard1.1/Virgil.SDK.targets",
+        "build/xamarinios/Virgil.SDK.targets",
+        "build/xamarinmac20/.DS_Store",
+        "build/xamarinmac20/Virgil.SDK.targets",
+        "lib/netstandard1.1/Virgil.SDK.dll",
+        "runtimes/android/lib/SecureStorage.Droid.dll",
+        "runtimes/ios/lib/SecureStorage.iOS.dll",
+        "runtimes/osx/lib/SecureStorage.Mac.dll",
+        "runtimes/osx/lib/SecureStorage.OSX.dll",
+        "runtimes/win/lib/SecureStorage.Win.dll",
+        "virgil.sdk.5.0.6.nupkg.sha512",
+        "virgil.sdk.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -9464,6 +9825,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
       "System.IdentityModel.Tokens.Jwt >= 5.6.0",
+      "Virgil.Crypto >= 2.4.10",
+      "Virgil.SDK >= 5.0.6",
       "bootstrap >= 4.4.1",
       "jQuery >= 3.4.1"
     ]
@@ -9552,6 +9915,14 @@
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[5.6.0, )"
+          },
+          "Virgil.Crypto": {
+            "target": "Package",
+            "version": "[2.4.10, )"
+          },
+          "Virgil.SDK": {
+            "target": "Package",
+            "version": "[5.0.6, )"
           },
           "bootstrap": {
             "target": "Package",

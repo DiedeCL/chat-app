@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SecurityPe.Data;
 using SecurityPe.Domain;
+using SecurityPe.Services;
 using SecurityPe.Settings;
 
 namespace SecurityPe
@@ -36,11 +37,8 @@ namespace SecurityPe
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy)); // zorgt er voor dat alleen geauthorizde user een connectie kunnen maken met de server
-            }); //voegt MVC services toe zo dat ge een web api kunt maken
+
+            services.AddControllers(); //voegt MVC services toe zo dat ge een web api kunt maken
             services.AddDbContext<ChatAppContext>(
                 options =>
                 {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecurityPe.Data;
 
 namespace SecurityPe.Migrations
 {
     [DbContext(typeof(ChatAppContext))]
-    partial class ChatAppContextModelSnapshot : ModelSnapshot
+    [Migration("20200318115604_addedRsaKey")]
+    partial class addedRsaKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

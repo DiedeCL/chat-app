@@ -36,8 +36,11 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
           "System.IdentityModel.Tokens.Jwt": "5.6.0",
+          "Virgil.Crypto": "2.4.10",
+          "Virgil.SDK": "5.0.6",
           "bootstrap": "4.4.1",
           "jQuery": "3.4.1",
+          "SecureStorage.Win": "1.0.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies.Reference": "3.1.0.0",
@@ -1191,8 +1194,30 @@
           "System.Buffers": "4.5.0"
         }
       },
+      "Microsoft.NETCore.Jit/1.0.2": {},
       "Microsoft.NETCore.Platforms/2.1.2": {},
+      "Microsoft.NETCore.Portable.Compatibility/1.0.1": {
+        "dependencies": {
+          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ServiceModel.dll": {
+            "assemblyVersion": "2.0.5.0",
+            "fileVersion": "4.6.24214.0"
+          }
+        },
+        "compile": {
+          "ref/netstandard1.0/System.ServiceModel.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+        "dependencies": {
+          "Microsoft.NETCore.Jit": "1.0.2",
+          "Microsoft.NETCore.Windows.ApiSets": "1.0.1"
+        }
+      },
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/3.1.1": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "3.1.2",
@@ -2433,6 +2458,156 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
+        }
+      },
+      "Virgil.Crypto/2.4.10": {
+        "dependencies": {
+          "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
+          "Virgil.CryptoAPI": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Virgil.Crypto.dll": {
+            "assemblyVersion": "2.4.6.0",
+            "fileVersion": "2.4.6.0"
+          },
+          "lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "rid": "linux-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "2.4.6.0",
+            "fileVersion": "2.4.6.0"
+          },
+          "runtimes/linux-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "rid": "linux-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "runtimes/osx-x64/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "rid": "osx-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "2.4.6.0",
+            "fileVersion": "2.4.6.0"
+          },
+          "runtimes/osx-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "rid": "osx-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "runtimes/win-x64/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "rid": "win-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "2.4.6.0",
+            "fileVersion": "2.4.6.0"
+          },
+          "runtimes/win-x64/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "rid": "win-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "runtimes/win-x86/lib/netstandard1.1/Virgil.Crypto.dll": {
+            "rid": "win-x86",
+            "assetType": "runtime",
+            "assemblyVersion": "2.4.6.0",
+            "fileVersion": "2.4.6.0"
+          },
+          "runtimes/win-x86/lib/netstandard1.1/Virgil.CryptoImpl.dll": {
+            "rid": "win-x86",
+            "assetType": "runtime",
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "runtimes/linux-x64/native/virgil_crypto_net.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/virgil_crypto_net.so.2": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/virgil_crypto_net.so.2.4.6": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/virgil_crypto_net.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/virgil_crypto_net.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/virgil_crypto_net.lib": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/virgil_crypto_net.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/virgil_crypto_net.lib": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.1/Virgil.Crypto.dll": {},
+          "lib/netstandard1.1/Virgil.CryptoImpl.dll": {}
+        }
+      },
+      "Virgil.CryptoAPI/1.0.2": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.1/VirgilCryptoAPI.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.1/VirgilCryptoAPI.dll": {}
+        }
+      },
+      "Virgil.SDK/5.0.6": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "Virgil.CryptoAPI": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Virgil.SDK.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.1/Virgil.SDK.dll": {}
+        }
+      },
+      "SecureStorage.Win/1.0.0.0": {
+        "runtime": {
+          "SecureStorage.Win.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "SecureStorage.Win.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -4514,6 +4689,13 @@
       "path": "microsoft.net.http.headers/2.2.0",
       "hashPath": "microsoft.net.http.headers.2.2.0.nupkg.sha512"
     },
+    "Microsoft.NETCore.Jit/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ok2vWofa6X8WD9vc4pfLHwvJz1/B6t3gOAoZcjrjrQf7lQOlNIuZIZtLn3wnWX28DuQGpPJkRlBxFj7Z5txNqw==",
+      "path": "microsoft.netcore.jit/1.0.2",
+      "hashPath": "microsoft.netcore.jit.1.0.2.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/2.1.2": {
       "type": "package",
       "serviceable": true,
@@ -4521,12 +4703,33 @@
       "path": "microsoft.netcore.platforms/2.1.2",
       "hashPath": "microsoft.netcore.platforms.2.1.2.nupkg.sha512"
     },
+    "Microsoft.NETCore.Portable.Compatibility/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Vd+lvLcGwvkedxtKn0U8s9uR4p0Lm+0U2QvDsLaw7g4S1W4KfPDbaW+ROhhLCSOx/gMYC72/b+z+o4fqS/oxVg==",
+      "path": "microsoft.netcore.portable.compatibility/1.0.1",
+      "hashPath": "microsoft.netcore.portable.compatibility.1.0.1.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A0x1xtTjYJWZr2DRzgfCOXgB0JkQg8twnmtTJ79wFje+IihlLbXtx6Z2AxyVokBM5ruwTedR6YdCmHk39QJdtQ==",
+      "path": "microsoft.netcore.runtime.coreclr/1.0.2",
+      "hashPath": "microsoft.netcore.runtime.coreclr.1.0.2.nupkg.sha512"
+    },
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SaToCvvsGMxTgtLv/BrFQ5IFMPRE1zpWbnqbpwykJa8W5XiX82CXI6K2o7yf5xS7EP6t/JzFLV0SIDuWpvBZVw==",
+      "path": "microsoft.netcore.windows.apisets/1.0.1",
+      "hashPath": "microsoft.netcore.windows.apisets.1.0.1.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Web.CodeGeneration/3.1.1": {
       "type": "package",
@@ -5381,6 +5584,32 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "Virgil.Crypto/2.4.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LlFZXPxwN8c03pQ3YxA+riZw6AH1BfyftL9li9Kx5Ooq/pmm/k8W43y23hzdZShzqwaMm4VPdq4VeK7UULUvbg==",
+      "path": "virgil.crypto/2.4.10",
+      "hashPath": "virgil.crypto.2.4.10.nupkg.sha512"
+    },
+    "Virgil.CryptoAPI/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rq7oJT9TgoMHV3tkYiIL/bIJxNW/lNkeseZ7X8b+pP83ejIK40nwW0OGUviIlIrydYlAJTNvwHI/6Wtk21oXLg==",
+      "path": "virgil.cryptoapi/1.0.2",
+      "hashPath": "virgil.cryptoapi.1.0.2.nupkg.sha512"
+    },
+    "Virgil.SDK/5.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0RnQEK8Bpm/oPzeDxHEO32yi81PQpCgUC+cK4n+BusP4j+qbhXWkpydUy173BaQWlZQR/sdQI1vvBBXA3sfcTg==",
+      "path": "virgil.sdk/5.0.6",
+      "hashPath": "virgil.sdk.5.0.6.nupkg.sha512"
+    },
+    "SecureStorage.Win/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
       "type": "referenceassembly",

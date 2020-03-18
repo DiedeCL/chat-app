@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SecurityPe.Domain;
+using SecurityPe.Models;
 
 namespace SecurityPe.Controllers
 {
@@ -15,22 +18,32 @@ namespace SecurityPe.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SecretsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetAllSecrets()
+        private readonly UserManager<User> _userManager;
+
+        public SecretsController(UserManager<User> userManager)
         {
-            var userInfoBuilder = new StringBuilder();
-            foreach (var userClaim in User.Claims)
-            {
-                userInfoBuilder.Append($"{userClaim.Type}: {userClaim.Value} * ");
-            }
-            return Ok(new[] { "secret1", "secret2", userInfoBuilder.ToString() });
+            _userManager = userManager;
         }
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public IActionResult GetById(int id)
+        [HttpPost("encrypt")]
+
+        public async Task<IActionResult> Encrypt([FromBody] UserModel model)
         {
-            return Ok($"secret with id {id}");
+            User user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var publicKey = GetPublicKey(user);
+            if (publicKey == null) return Ok("Key does not exist");
+
+            return Ok(publicKey.ToString());
+        }
+
+        private byte[] GetPublicKey(User user)
+        {
+            return user.UserKey.PublicKey;
         }
     }
 }

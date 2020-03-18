@@ -27,6 +27,11 @@ namespace SecurityPe.Services
             return _context.Conversations.FirstOrDefault(c => c.Id == id);
         }
 
+        public IEnumerable<Message> GetMessages(int conversationId)
+        {
+            return GetConversationById(conversationId).Messages;
+        }
+
         public void Add(Conversation newConversation)
         {
             _context.Conversations.Add(newConversation);

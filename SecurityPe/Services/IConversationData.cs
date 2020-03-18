@@ -10,6 +10,8 @@ namespace SecurityPe.Services
     {
         IEnumerable<Conversation> GetAll();
         Conversation GetConversationById(int id);
+
+        IEnumerable<Message> GetMessages(int conversationId);
         void Add(Conversation newConversation);
     }
 }

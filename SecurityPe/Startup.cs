@@ -75,6 +75,9 @@ namespace SecurityPe
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Key))
                     };
                 });
+            services.AddScoped(typeof(SqlConversationData), typeof(SqlConversationData));
+            services.AddScoped(typeof(SqlUserKeyData), typeof(SqlUserKeyData));
+            services.AddSingleton(typeof(ServerData), typeof(ServerData)); // de keys van de server blijft van het zelfde object
         }
 
 

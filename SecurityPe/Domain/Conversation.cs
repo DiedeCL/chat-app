@@ -8,6 +8,9 @@ namespace SecurityPe.Domain
     {
         public int Id { get; set; }
         public IList<Message> Messages { get; set; }
-        public IList<UserConversation> UserConversations { get; set; }
+
+        public int UserOneId { get; set; }
+        public int UserTwoId { get; set; }
+
     }
 }

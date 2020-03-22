@@ -11,6 +11,7 @@ namespace SecurityPe.Domain
     {
          
         public const string User = "User";
+        public const string Server = "Server";
         
     }
 }

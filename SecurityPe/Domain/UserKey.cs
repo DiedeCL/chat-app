@@ -10,16 +10,16 @@ namespace SecurityPe.Domain
     {
         public UserKey()
         {
-            var rsa = RSA.Create();
-            PublicKey = rsa.ExportRSAPublicKey();
-            PrivateKey = rsa.ExportRSAPrivateKey();
+           
         }
 
-        public byte[] PublicKey { get; }
-        public byte[] PrivateKey { get; }
+        public string PublicKey { get; set; } // in xml format      
+        public string PrivateKey { get; set; } // in xml format
 
         public User User { get; set; }
         public int UserId { get; set; }
         public int Id { get; set; }
+
+      
     }
 }

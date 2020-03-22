@@ -14,7 +14,8 @@ namespace SecurityPe.Data
        
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<UserConversation> UserConversations { get; set; }
+        //public DbSet<UserConversation> UserConversations { get; set; }
+        public DbSet<UserKey> UserKeys { get; set; }
 
         public ChatAppContext(DbContextOptions options) : base(options)
         {
@@ -28,6 +29,7 @@ namespace SecurityPe.Data
 
             // create foreign key of Users 
 
+            /*
             modelBuilder.Entity<UserConversation>()
                 .HasKey(conversation => new { conversation.UserId, conversation.ConversationId });
             modelBuilder.Entity<UserConversation>()
@@ -39,6 +41,7 @@ namespace SecurityPe.Data
                 .HasOne(c => c.User)
                 .WithMany(u => u.UserConversations)
                 .HasForeignKey(c => c.UserId);
+                */
 
             modelBuilder.Entity<Message>()
                 .HasOne(m => m.Conversation)

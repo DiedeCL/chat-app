@@ -13,7 +13,10 @@ using Microsoft.IdentityModel.Tokens;
 
 using SecurityPe.Domain;
 using SecurityPe.Models;
+using SecurityPe.Services;
 using SecurityPe.Settings;
+using System.Text.Json;
+
 
 namespace SecurityPe.Controllers
 {
@@ -25,17 +28,20 @@ namespace SecurityPe.Controllers
         private readonly RoleManager<Role> _roleManager;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IOptions<TokenSettings> _tokenSettings;
-
+        private readonly SqlUserKeyData _keyData;
+        private readonly ServerData _serverData;
         public AuthenticationController(
             UserManager<User> userManager,
             RoleManager<Role> roleManager,
             IPasswordHasher<User> passwordHasher,
-            IOptions<TokenSettings> tokenSettings)
+            IOptions<TokenSettings> tokenSettings, SqlUserKeyData keyData, ServerData serverData)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _passwordHasher = passwordHasher;
             _tokenSettings = tokenSettings;
+            _keyData = keyData;
+            _serverData = serverData;
         }
 
         [HttpPost("register")]
@@ -45,10 +51,12 @@ namespace SecurityPe.Controllers
             //if (!ModelState.IsValid) return BadRequest(ModelState);
             //TODO (someday): add captcha validation to prevent registration by bots
 
+
             var user = new User
             {
                 UserName = model.UserName,
-                Email = model.Email
+                Email = model.Email,
+                UserKey = _keyData.CreateUserKey()
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
@@ -57,6 +65,7 @@ namespace SecurityPe.Controllers
                 string role =Role.User;
                 await EnsureRoleExists(role);
                 await _userManager.AddToRoleAsync(user, role);
+                
                 //TODO (someday): make the user confirm his email address
                 return Ok();
             }
@@ -68,6 +77,8 @@ namespace SecurityPe.Controllers
             }
             return BadRequest(ModelState);
         }
+
+       
 
         [HttpPost("token")]
         public async Task<IActionResult> CreateToken([FromBody] LoginModel model)

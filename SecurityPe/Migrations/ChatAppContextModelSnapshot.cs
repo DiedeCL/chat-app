@@ -127,7 +127,18 @@ namespace SecurityPe.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserOneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserTwoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Conversations");
                 });
@@ -139,14 +150,23 @@ namespace SecurityPe.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ContentOfMessage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
 
+                    b.Property<string>("EncryptedAesIV")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EncryptedAesKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EncryptedContentOfMessage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("IdOfSender")
                         .HasColumnType("int");
+
+                    b.Property<string>("Md5Hash")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -251,27 +271,18 @@ namespace SecurityPe.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SecurityPe.Domain.UserConversation", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ConversationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ConversationId");
-
-                    b.HasIndex("ConversationId");
-
-                    b.ToTable("UserConversations");
-                });
-
             modelBuilder.Entity("SecurityPe.Domain.UserKey", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PrivateKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -281,7 +292,7 @@ namespace SecurityPe.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserKey");
+                    b.ToTable("UserKeys");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -335,26 +346,18 @@ namespace SecurityPe.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SecurityPe.Domain.Conversation", b =>
+                {
+                    b.HasOne("SecurityPe.Domain.User", null)
+                        .WithMany("Conversations")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("SecurityPe.Domain.Message", b =>
                 {
                     b.HasOne("SecurityPe.Domain.Conversation", "Conversation")
                         .WithMany("Messages")
                         .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SecurityPe.Domain.UserConversation", b =>
-                {
-                    b.HasOne("SecurityPe.Domain.Conversation", "Conversation")
-                        .WithMany("UserConversations")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SecurityPe.Domain.User", "User")
-                        .WithMany("UserConversations")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

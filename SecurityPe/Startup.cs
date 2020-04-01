@@ -77,7 +77,7 @@ namespace SecurityPe
                 });
             services.AddScoped(typeof(SqlConversationData), typeof(SqlConversationData));
             services.AddScoped(typeof(SqlUserKeyData), typeof(SqlUserKeyData));
-            services.AddSingleton(typeof(ServerData), typeof(ServerData)); // de keys van de server blijft van het zelfde object
+            services.AddScoped(typeof(MessageService), typeof(MessageService));
         }
 
 

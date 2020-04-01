@@ -6,11 +6,15 @@ namespace SecurityPe.Domain
 {
     public class Conversation
     {
+        public Conversation()
+        {
+            Messages = new List<Message>();
+        }
         public int Id { get; set; }
+
         public IList<Message> Messages { get; set; }
 
-        public int UserOneId { get; set; }
-        public int UserTwoId { get; set; }
+        public List<UserConversation> UserConversations { get; set; }
 
     }
 }

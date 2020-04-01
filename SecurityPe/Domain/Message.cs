@@ -5,8 +5,8 @@ namespace SecurityPe.Domain
     public class Message
     {
         public string EncryptedContentOfMessage { get; set; }
-        public int IdOfSender { get; set; }
-        public string Md5Hash { get; set; }
+        public string EmailOfSender { get; set; }
+        public string SignedData { get; set; }
         public string EncryptedAesKey { get; set; }
 
         public string EncryptedAesIV { get; set; }

@@ -1,66 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using SecurityPe.Domain;
-
+using Newtonsoft.Json;
 
 namespace SecurityPe.Services
 {
     public class EncryptionServices
     {
+        private RSACryptoServiceProvider _rsaCryptoService = new RSACryptoServiceProvider();
 
-
-        public static string GetPublicKey()
+        public string GetPublicKey()
         {
-            using RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider();
-            return rsaCryptoService.ToXmlString(false);
+            return _rsaCryptoService.ToXmlString(false);
+
         }
 
-        public static string GetPrivateKey()
+        public string GetPrivateKey()
         {
-            using RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider();
-            return rsaCryptoService.ToXmlString(true);
+           return _rsaCryptoService.ToXmlString(true);
+            
         }
 
-        public static string EncryptWithRsa(byte[] data, string key)
+        public static string EncryptWithRsa(string data, string key)
         {
             using RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider();
             rsaCryptoService.FromXmlString(key);
-            return Encoding.ASCII.GetString(rsaCryptoService.Encrypt(data, RSAEncryptionPadding.OaepSHA256));
+            return Convert.ToBase64String(rsaCryptoService.Encrypt(Convert.FromBase64String(data), true));
+            
         }
 
-        public static string DecryptWithRsa(byte[] data, string key)
+        public static byte[] DecryptWithRsa(string data, string key)
         {
+            
             using (RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider())
             {
+
                 rsaCryptoService.FromXmlString(key);
-                return Encoding.ASCII.GetString(rsaCryptoService.Decrypt(data, RSAEncryptionPadding.OaepSHA256));
+                return rsaCryptoService.Decrypt(Convert.FromBase64String(data), true);
+               
             }
         }
 
-        public static byte[] GetAesKey()
+        public static string GetAesKey()
         {
             using (AesCryptoServiceProvider provider = new AesCryptoServiceProvider())
             {
                 provider.GenerateKey();
-                return provider.Key;
+                return Convert.ToBase64String(provider.Key);
             }
         }
 
-        public static byte[] GetAesIV()
+        public static string GetAesIV()
         {
             using (AesCryptoServiceProvider provider = new AesCryptoServiceProvider())
             {
                 provider.GenerateIV();
-                return provider.IV;
+                return Convert.ToBase64String(provider.IV);
             }
         }
-        public static string EncryptWithAes(byte[] key, byte[] IV, string plainText)
+
+        public static string EncryptWithAes(string key, string IV, string plainText)
         {
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
@@ -75,8 +76,9 @@ namespace SecurityPe.Services
             // with the specified key and IV.
             using (AesCryptoServiceProvider provider = new AesCryptoServiceProvider())
             {
-                provider.Key = key;
-                provider.IV = IV;
+                provider.Key = Convert.FromBase64String(key);
+                provider.IV = Convert.FromBase64String(IV);
+                provider.Padding = PaddingMode.PKCS7;
 
                 // Create an encryptor to perform the stream transform.
                 ICryptoTransform encryptor = provider.CreateEncryptor(provider.Key, provider.IV);
@@ -99,11 +101,10 @@ namespace SecurityPe.Services
             }
 
             // Return the encrypted bytes from the memory stream.
-            return Encoding.ASCII.GetString(encrypted);
+            return Convert.ToBase64String(encrypted);
         }
 
-
-        static string DecryptWithAes(byte[] cipherText, byte[] key, byte[] IV)
+        public static string DecryptWithAes(byte[] cipherText, byte[] key, byte[] IV)
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
@@ -123,6 +124,7 @@ namespace SecurityPe.Services
             {
                 provider.Key = key;
                 provider.IV = IV;
+                provider.Padding = PaddingMode.PKCS7;
 
                 // Create a decryptor to perform the stream transform.
                 ICryptoTransform decryptor = provider.CreateDecryptor(provider.Key, provider.IV);
@@ -134,7 +136,6 @@ namespace SecurityPe.Services
                     {
                         using (StreamReader reader = new StreamReader(cryptoStream))
                         {
-
                             // Read the decrypted bytes from the decrypting stream
                             // and place them in a string.
                             plaintext = reader.ReadToEnd();
@@ -146,22 +147,29 @@ namespace SecurityPe.Services
             return plaintext;
         }
 
-
-        public static string CreateHashFromString(string message)
+        public static string SingData(string message, string key)
         {
-            using MD5CryptoServiceProvider provider = new MD5CryptoServiceProvider();
-            var computeHash = provider.ComputeHash(Encoding.ASCII.GetBytes(message));
-            var md5Hash = new StringBuilder();
+            using RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider();
+            rsaCryptoService.FromXmlString(key);
+            var buffer = Encoding.Unicode.GetBytes(message);
+            var singedData = rsaCryptoService.SignData(buffer, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+            
+;            return Convert.ToBase64String(singedData);
+        }   
+        
+        
+        public static bool VerifyData(string message, string key, string signedData)
+        {
+            
+            using RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider();
+            rsaCryptoService.FromXmlString(key);
+            var sha1CryptoServiceProvider = new SHA1CryptoServiceProvider();
+            var buffer = Encoding.Unicode.GetBytes(message);
+            return rsaCryptoService.VerifyData(buffer, Convert.FromBase64String(signedData), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
 
-            foreach (var hashByte in computeHash)
-            {
-                md5Hash.Append(hashByte);
-            }
 
-            return md5Hash.ToString();
+
+
         }
     }
 }
-
-
-

@@ -18,29 +18,16 @@ namespace SecurityPe.Services
 
         public string GetPublicKey(int userId)
         {
-            return GetUserKey(userId).PublicKey;
+            throw new NotImplementedException();
+            
         }
 
         public string GetPrivateKey(int userId)
         {
-            return GetUserKey(userId).PrivateKey;
+            throw new NotImplementedException();
 
         }
 
-        private UserKey GetUserKey(int userId)
-        {
-            return _context.UserKeys.FirstOrDefault(uk => uk.UserId == userId);
-        }
-
-        public UserKey CreateUserKey()
-        {
-
-            return new UserKey
-            {
-                PublicKey = EncryptionServices.GetPublicKey(),
-                PrivateKey = EncryptionServices.GetPrivateKey()
-            };
-        }
 
     }
 

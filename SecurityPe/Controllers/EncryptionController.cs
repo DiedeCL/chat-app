@@ -21,7 +21,7 @@ namespace SecurityPe.Controllers
         [HttpPost("EncryptWithRsa")]
         public IActionResult ServerPublicKey([FromBody] EncryptModel model)
         {
-            EncryptionServices.EncryptWithRsa(Encoding.ASCII.GetBytes(model.Data), model.PrivateKey);
+            EncryptionServices.EncryptWithRsa(model.Data, model.PrivateKey);
 
             return Ok();
         }

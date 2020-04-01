@@ -100,8 +100,6 @@ C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcore
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.csproj.CopyComplete
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.pdb
-C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
-C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -210,3 +208,5 @@ C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcore
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Virgil.SDK.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\SecureStorage.Win.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.csproj.CoreCompileInputs.cache
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.genruntimeconfig.cache

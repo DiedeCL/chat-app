@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using SecurityPe.Models;
 using SecurityPe.Services;
 using SecurityPe.Settings;
 using System.Text.Json;
+using SecurityPe.Data;
 
 
 namespace SecurityPe.Controllers
@@ -29,19 +31,20 @@ namespace SecurityPe.Controllers
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IOptions<TokenSettings> _tokenSettings;
         private readonly SqlUserKeyData _keyData;
-        private readonly ServerData _serverData;
+        private ChatAppContext _context;
+
         public AuthenticationController(
             UserManager<User> userManager,
             RoleManager<Role> roleManager,
             IPasswordHasher<User> passwordHasher,
-            IOptions<TokenSettings> tokenSettings, SqlUserKeyData keyData, ServerData serverData)
+            IOptions<TokenSettings> tokenSettings, SqlUserKeyData keyData, ChatAppContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _passwordHasher = passwordHasher;
             _tokenSettings = tokenSettings;
             _keyData = keyData;
-            _serverData = serverData;
+            _context = context;
         }
 
         [HttpPost("register")]
@@ -50,13 +53,12 @@ namespace SecurityPe.Controllers
             //The next line can be commented out because of the [ApiController] attribute
             //if (!ModelState.IsValid) return BadRequest(ModelState);
             //TODO (someday): add captcha validation to prevent registration by bots
-
-
+           
+            var hashPassword = _passwordHasher.HashPassword(null, model.Password);
             var user = new User
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                UserKey = _keyData.CreateUserKey()
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
@@ -65,8 +67,7 @@ namespace SecurityPe.Controllers
                 string role =Role.User;
                 await EnsureRoleExists(role);
                 await _userManager.AddToRoleAsync(user, role);
-                
-                //TODO (someday): make the user confirm his email address
+                AddKeysToDb(model);
                 return Ok();
             }
 
@@ -78,7 +79,21 @@ namespace SecurityPe.Controllers
             return BadRequest(ModelState);
         }
 
-       
+        private void AddKeysToDb(RegisterModel model)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            var encryptionServices = new EncryptionServices();
+            var aesIv = EncryptionServices.GetAesIV();
+            user.AesIv = aesIv;
+            user.PrivateKey = encryptionServices.GetPrivateKey();
+            _context.PublicKeyStores.Add(new PublicKeyStore
+            {
+                Email = model.Email,
+                PublicKey = encryptionServices.GetPublicKey()
+            });
+            _context.SaveChanges();
+        }
+
 
         [HttpPost("token")]
         public async Task<IActionResult> CreateToken([FromBody] LoginModel model)
@@ -129,7 +144,7 @@ namespace SecurityPe.Controllers
                 allClaims.Add(roleClaim);
             }
 
-            var keyBytes = Encoding.UTF8.GetBytes(_tokenSettings.Value.Key);
+            var keyBytes =Encoding.ASCII.GetBytes(_tokenSettings.Value.Key);
             var symmetricSecurityKey = new SymmetricSecurityKey(keyBytes);
             var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 

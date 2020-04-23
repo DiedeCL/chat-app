@@ -45,6 +45,13 @@ namespace SecurityPe
                     var connectionString = Configuration["ConnectionString"];
                     options.UseSqlServer(connectionString);
                 });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
             services.AddIdentity<User, Role>(options =>
             {
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // aantal keren fout wachtwoord moet ge 5 min wachten
@@ -94,6 +101,7 @@ namespace SecurityPe
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

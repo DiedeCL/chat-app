@@ -2,43 +2,26 @@
   <v-app>
     <v-app-bar
       app
+      flat
       color="primary"
       dark
+      elevate-on-scroll
+      
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+        <v-toolbar-title> <v-btn text to="/" >Chat App</v-btn></v-toolbar-title>
+        
+        
     </v-app-bar>
+     <v-content>
+    <v-container fluid>
 
-    <v-content>
-    </v-content>
+      <router-view></router-view>
+    </v-container>
+  </v-content>
+
+  <v-footer app>
+    Copright groep GHI_PQR 18
+  </v-footer>
   </v-app>
 </template>
 
@@ -51,7 +34,14 @@ export default {
   },
 
   data: () => ({
-    //
+    
   }),
 };
 </script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+</style>

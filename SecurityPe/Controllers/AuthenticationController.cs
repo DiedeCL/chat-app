@@ -50,8 +50,7 @@ namespace SecurityPe.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            //The next line can be commented out because of the [ApiController] attribute
-            //if (!ModelState.IsValid) return BadRequest(ModelState);
+            
             //TODO (someday): add captcha validation to prevent registration by bots
            
             var hashPassword = _passwordHasher.HashPassword(null, model.Password);

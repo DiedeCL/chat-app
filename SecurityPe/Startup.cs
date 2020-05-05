@@ -44,7 +44,7 @@ namespace SecurityPe
                 {
                     var connectionString = Configuration["ConnectionString"];
                     options.UseSqlServer(connectionString);
-                });
+                }, ServiceLifetime.Transient);
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

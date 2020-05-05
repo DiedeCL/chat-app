@@ -8,6 +8,9 @@ namespace SecurityPe.Models
         public int ConversationID { get; set; }
         [Required] 
         [EmailAddress]
-        public string Email { get; set; }
+        public string ReceiversEmail { get; set; }
+        [Required]
+        [EmailAddress]
+        public string SendersEmail { get; set; }
     }
 }

@@ -24,7 +24,7 @@
           <v-text-field
             v-model="password"
             :rules="passwordRules"
-            :counter="8"
+            
             label="Password"
             required
             type="password"

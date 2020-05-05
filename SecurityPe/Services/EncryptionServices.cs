@@ -36,9 +36,17 @@ namespace SecurityPe.Services
             
             using (RSACryptoServiceProvider rsaCryptoService = new RSACryptoServiceProvider())
             {
-
-                rsaCryptoService.FromXmlString(key);
-                return rsaCryptoService.Decrypt(Convert.FromBase64String(data), true);
+                try
+                {
+                    rsaCryptoService.FromXmlString(key);
+                    return rsaCryptoService.Decrypt(Convert.FromBase64String(data), true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return new byte[0];
+                }
+               
                
             }
         }
@@ -108,11 +116,11 @@ namespace SecurityPe.Services
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
-                throw new ArgumentNullException("cipherText");
+                return String.Empty;
             if (key == null || key.Length <= 0)
-                throw new ArgumentNullException("key");
+                return String.Empty;
             if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("IV");
+                return String.Empty;
 
             // Declare the string used to hold
             // the decrypted text.

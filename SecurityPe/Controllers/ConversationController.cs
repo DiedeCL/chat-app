@@ -67,32 +67,78 @@ namespace SecurityPe.Controllers
         }
 
         [HttpPost("{action}")]
+        public async Task<IActionResult> GetConversationInformationById([FromBody] ConversationInformationModel model)
+        {
+            var userConversationsWithThisId = _context.UserConversations
+                .Where(uc => uc.ConversationId == model.ConversationID).ToList();
+            var currentUser = await FindByEmailAsync(model.EmailOfCurrentUser);
+            List<User> users = new List<User>();
+            List<int> userIds = new List<int>();
+            userConversationsWithThisId.ForEach(uc => userIds.Add(uc.UserId));
+            for (int i = 0; i < userIds.Count; i++)
+            {
+                var user = await _userManager.FindByIdAsync(userIds[i].ToString());
+                users.Add(user);
+            }
+            var otherUserOfConversation = users.FirstOrDefault(u => u.Email.ToUpper() != model.EmailOfCurrentUser.ToUpper());
+            if (otherUserOfConversation == null)
+            {
+                return BadRequest("conversation doesn't exist");
+            }
+            return Ok(new
+            {
+                Email = otherUserOfConversation.Email,
+                ConversationId = model.ConversationID
+
+            });
+        }
+
+        [HttpPost("{action}")]
         public async Task<IActionResult> GetConversationById([FromBody] ConversationModel model)
         {
-            var user = await FindByEmailAsync(model.Email);
-
-            var messages = _context.Messages.Where(m => m.ConversationId == model.ConversationID).Select(me =>
-                 new
+            var receiver = await FindByEmailAsync(model.ReceiversEmail);
+            var messages = new List<ReturnMessage>();
+            
+            _context.Messages.Where(m => m.ConversationId == model.ConversationID).ToList().ForEach(async me =>
+            {
+                var content = DecryptWithAes(me, receiver);
+                if (content.Equals(String.Empty))
                 {
-                    me.Id,
-                    content = DecryptWithAes(me, user),
-                    me.ConversationId,
-                    me.EmailOfSender,
-                    dataIsTrusted = EncryptionServices.VerifyData
-                        (DecryptWithAes(me, user)
-                        ,_context.PublicKeyStores.FirstOrDefault(store => store.Email == me.EmailOfSender).PublicKey 
-                        , me.SignedData)
+                    var sender = await FindByEmailAsync(model.SendersEmail);
+                    content = DecryptWithAes(me, sender);
                 }
-            ).ToList();
+                var rMessage = new ReturnMessage
+                    {
+                        MessageId = me.Id,
+                        Content = content,
+                        ConversationId = me.ConversationId,
+                        EmailOfSender = me.EmailOfSender,
+                        DataIsTrusted = EncryptionServices.VerifyData
+                        (content, _context.PublicKeyStores.FirstOrDefault(store => store.Email == me.EmailOfSender)?.PublicKey, me.SignedData)
+
+                    };
+
+                messages.Add(rMessage);
+
+            }
+            );
+           
             return Ok(messages);
+            
+            
         }
         
         private static string DecryptWithAes(Message me, User user)
         {
             var key = EncryptionServices.DecryptWithRsa(me.EncryptedAesKey, user.PrivateKey);
             var iv =Convert.FromBase64String(me.EncryptedAesIV); //EncryptionServices.DecryptWithRsa(me.EncryptedAesIV, user.PrivateKey);
-            return EncryptionServices.DecryptWithAes(
+            var decryptWithAes = EncryptionServices.DecryptWithAes(
                 Convert.FromBase64String(me.EncryptedContentOfMessage), key, iv);
+            if (decryptWithAes.Length == 0)
+            {
+                return String.Empty;
+            }
+            return decryptWithAes;
         }
 
         [HttpPost("{action}")]

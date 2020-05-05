@@ -11,7 +11,7 @@ function signup(Email, Password, UserName) {
         mode: 'cors',
         body: JSON.stringify({Email, Password, UserName})
     };
-    console.log(requestOptions)
+    
     return fetch(`https://localhost:5001/api/authentication/register`, requestOptions)
         .then((response) => {
             console.log(response.status)
@@ -26,7 +26,6 @@ function login(Email, Password) {
         mode: 'cors',
         body: JSON.stringify({Email, Password})
     };
-    console.log(requestOptions)
 
     return fetch(`https://localhost:5001/api/authentication/token`, requestOptions)
         .then(handleResponse)

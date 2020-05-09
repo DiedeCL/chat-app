@@ -91,7 +91,6 @@ C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcore
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.csprojAssemblyReference.cache
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\staticwebassets\SecurityPe.StaticWebAssets.Manifest.cache
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\staticwebassets\SecurityPe.StaticWebAssets.xml
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.AssemblyInfoInputs.cache
@@ -205,8 +204,16 @@ C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcore
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\win-x86\lib\netstandard1.1\Virgil.CryptoImpl.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\virgil_crypto_net.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\virgil_crypto_net.lib
-C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Virgil.SDK.dll
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\SecureStorage.Win.dll
-C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.csproj.CoreCompileInputs.cache
 C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.genruntimeconfig.cache
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\NLog.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\nlog.config
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\credentials.json
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.csproj.CoreCompileInputs.cache
+C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe\obj\Debug\netcoreapp3.1\SecurityPe.MvcApplicationPartsAssemblyInfo.cache

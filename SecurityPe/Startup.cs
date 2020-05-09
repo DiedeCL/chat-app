@@ -81,7 +81,16 @@ namespace SecurityPe
                         ValidAudience = tokenSettings.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Key))
                     };
-                });
+                })
+                //Code for adding google in an later stadium
+                /*.AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });*/ ;
             services.AddScoped(typeof(SqlConversationData), typeof(SqlConversationData));
             services.AddScoped(typeof(SqlUserKeyData), typeof(SqlUserKeyData));
             services.AddScoped(typeof(MessageService), typeof(MessageService));

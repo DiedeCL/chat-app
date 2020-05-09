@@ -4,12 +4,12 @@
       <template v-for="message in messages">
         <v-list-item :key="message.MessageId">
           <v-list-item-content>
-            <v-list-item-title v-html="message.emailOfSender"></v-list-item-title>
+            <v-list-item-title>{{message.emailOfSender}}</v-list-item-title>
             <v-container v-if="message.dataIsTrusted">
-              <v-list-item-subtitle v-html="message.content" id="green"></v-list-item-subtitle>
+              <v-list-item-subtitle  id="green">{{message.content}}</v-list-item-subtitle>
             </v-container>
             <v-container v-else>
-              <v-list-item-subtitle v-html="message.content" id="red"></v-list-item-subtitle>
+              <v-list-item-subtitle id="red">{{message.content}}</v-list-item-subtitle>
             </v-container>
           </v-list-item-content>
         </v-list-item>
@@ -54,7 +54,7 @@ export default {
     fetch(url, requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
+       
         for (let index = 0; index < result.length; index++) {
           const element = result[index];
           this.addMessage(element);

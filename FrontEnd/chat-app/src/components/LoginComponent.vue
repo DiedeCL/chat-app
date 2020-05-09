@@ -14,6 +14,7 @@
             :rules="emailRules"
             label="E-mail"
             required
+            type="email"
           ></v-text-field>
         </v-col>
       </v-row>

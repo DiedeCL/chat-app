@@ -29,7 +29,7 @@ namespace SecurityPe.Services
                 var encryptedMessageWithAes = EncryptionServices.EncryptWithAes(aesKey, aesIv, message);
                 var encryptedAesKeyWithRsa = EncryptionServices.EncryptWithRsa(aesKey, publicKeyReceiver);
                 var encryptedAesIVWithRsa =aesIv;
-                var hashFromMessage = EncryptHashFromMessageWithRsa(message, sender);
+                
                 var conversation = _context.Conversations.FirstOrDefault(c => c.Id == conversationId);
                 if (conversation == null) return false;
                 var message1 = new Message
@@ -55,11 +55,7 @@ namespace SecurityPe.Services
            
         }
 
-        private static string EncryptHashFromMessageWithRsa(string message, User sender)
-        {
-            return null;
-        }
-
+      
         public bool CreateNewConversation(User sender, User receiver)
         {
             try

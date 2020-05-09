@@ -17,6 +17,7 @@ using SecurityPe.Models;
 using SecurityPe.Services;
 using SecurityPe.Settings;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using SecurityPe.Data;
 
 
@@ -32,12 +33,13 @@ namespace SecurityPe.Controllers
         private readonly IOptions<TokenSettings> _tokenSettings;
         private readonly SqlUserKeyData _keyData;
         private ChatAppContext _context;
+        private readonly ILogger<AuthenticationController> _logger;
 
         public AuthenticationController(
             UserManager<User> userManager,
             RoleManager<Role> roleManager,
             IPasswordHasher<User> passwordHasher,
-            IOptions<TokenSettings> tokenSettings, SqlUserKeyData keyData, ChatAppContext context)
+            IOptions<TokenSettings> tokenSettings, SqlUserKeyData keyData, ChatAppContext context, ILogger<AuthenticationController> logger)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -45,6 +47,7 @@ namespace SecurityPe.Controllers
             _tokenSettings = tokenSettings;
             _keyData = keyData;
             _context = context;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -67,6 +70,7 @@ namespace SecurityPe.Controllers
                 await EnsureRoleExists(role);
                 await _userManager.AddToRoleAsync(user, role);
                 AddKeysToDb(model);
+                _logger.LogInformation($"Register - {user.Email} registered to the system");
                 return Ok();
             }
 
@@ -110,6 +114,7 @@ namespace SecurityPe.Controllers
             }
 
             string token = await CreateJwtToken(user);
+            _logger.LogInformation($"Login - {user.Email} logged in ");
             return Ok(token);
         }
 

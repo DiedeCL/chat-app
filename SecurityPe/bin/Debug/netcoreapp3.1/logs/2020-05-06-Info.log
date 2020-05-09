@@ -1,0 +1,11 @@
+2020-05-06 11:35:01.6594||Microsoft.Hosting.Lifetime|INFO|Now listening on: https://localhost:5001 
+2020-05-06 11:35:01.6971||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5000 
+2020-05-06 11:35:01.6971||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2020-05-06 11:35:01.6971||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2020-05-06 11:35:01.6971||Microsoft.Hosting.Lifetime|INFO|Content root path: C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe 
+2020-05-06 11:35:13.8783||SecurityPe.Controllers.ConversationController|INFO|SendMessage - balou1@gmail.com send a messages to bogaert@gmail.com 
+2020-05-06 11:36:14.4837||Microsoft.Hosting.Lifetime|INFO|Now listening on: https://localhost:5001 
+2020-05-06 11:36:14.4989||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5000 
+2020-05-06 11:36:14.4989||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2020-05-06 11:36:14.5011||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2020-05-06 11:36:14.5011||Microsoft.Hosting.Lifetime|INFO|Content root path: C:\Users\diede\Documents\School\Security\SecurityPE\SecurityPe 

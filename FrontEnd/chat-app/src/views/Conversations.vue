@@ -59,7 +59,7 @@ export default {
         let counter = 0;
         for (let index = 0; index < result.length; index++) {
           let email = result[index].email;
-          if (email != currentUsersEmailAdress) {
+          if (email.toUpperCase() != currentUsersEmailAdress.toUpperCase()) {
             this.users[counter] = email;
             counter++;
           }
@@ -96,7 +96,7 @@ export default {
         requestOptions
       )
         .then(response => response.text())
-        .then(() => location.reload)
+        .then(() => location.reload())
         .catch(error => console.log("error", error));
       this.dialog = false;
     },

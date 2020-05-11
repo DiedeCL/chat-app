@@ -34,7 +34,7 @@ namespace SecurityPe.Controllers
     public class ConversationController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly SqlUserKeyData _keyData;
+        
         private readonly MessageService _messageService;
         private ChatAppContext _context;
         private readonly ILogger<ConversationController> _logger;

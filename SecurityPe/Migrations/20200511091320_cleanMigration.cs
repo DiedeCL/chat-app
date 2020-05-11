@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SecurityPe.Migrations
 {
-    public partial class initial : Migration
+    public partial class cleanMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,8 @@ namespace SecurityPe.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    PrivateKey = table.Column<string>(nullable: true)
+                    PrivateKey = table.Column<string>(nullable: true),
+                    AesIv = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -188,8 +189,9 @@ namespace SecurityPe.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EncryptedContentOfMessage = table.Column<string>(nullable: true),
-                    IdOfSender = table.Column<int>(nullable: false),
-                    Md5Hash = table.Column<string>(nullable: true),
+                    IdOfFile = table.Column<int>(nullable: false),
+                    EmailOfSender = table.Column<string>(nullable: true),
+                    SignedData = table.Column<string>(nullable: true),
                     EncryptedAesKey = table.Column<string>(nullable: true),
                     EncryptedAesIV = table.Column<string>(nullable: true),
                     ConversationId = table.Column<int>(nullable: false)
@@ -199,6 +201,26 @@ namespace SecurityPe.Migrations
                     table.PrimaryKey("PK_Messages", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Messages_Conversations_ConversationId",
+                        column: x => x.ConversationId,
+                        principalTable: "Conversations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StoredFiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FilePath = table.Column<string>(nullable: true),
+                    ConversationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StoredFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StoredFiles_Conversations_ConversationId",
                         column: x => x.ConversationId,
                         principalTable: "Conversations",
                         principalColumn: "Id",
@@ -276,6 +298,11 @@ namespace SecurityPe.Migrations
                 column: "ConversationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StoredFiles_ConversationId",
+                table: "StoredFiles",
+                column: "ConversationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserConversations_ConversationId",
                 table: "UserConversations",
                 column: "ConversationId");
@@ -308,6 +335,9 @@ namespace SecurityPe.Migrations
 
             migrationBuilder.DropTable(
                 name: "PublicKeyStores");
+
+            migrationBuilder.DropTable(
+                name: "StoredFiles");
 
             migrationBuilder.DropTable(
                 name: "UserConversations");

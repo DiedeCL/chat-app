@@ -17,6 +17,7 @@ namespace SecurityPe.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<PublicKeyStore> PublicKeyStores { get; set; }
         public DbSet<UserConversation> UserConversations { get; set; }
+        public DbSet<StoredFile> StoredFiles { get; set; }
 
         public ChatAppContext(DbContextOptions options) : base(options)
         {

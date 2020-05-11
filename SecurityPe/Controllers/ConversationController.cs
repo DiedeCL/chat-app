@@ -18,8 +18,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Net.Mime;
+using System.Threading;
 using System.Web;
 using System.Web.Http;
+using Microsoft.AspNetCore.Http;
+
+//using Microsoft.AspNetCore.Http;
 
 namespace SecurityPe.Controllers
 {
@@ -33,14 +38,17 @@ namespace SecurityPe.Controllers
         private readonly MessageService _messageService;
         private ChatAppContext _context;
         private readonly ILogger<ConversationController> _logger;
+        private FileService _fileService;
+
         public ConversationController(UserManager<User> userManager, SqlUserKeyData keyData,
-             MessageService messageService, ChatAppContext context, ILogger<ConversationController> logger)
+             MessageService messageService, ChatAppContext context, ILogger<ConversationController> logger, FileService fileService)
         {
             _userManager = userManager;
             _keyData = keyData;
             _messageService = messageService;
             _context = context;
             _logger = logger;
+            _fileService = fileService;
         }
 
         [HttpPost("{action}")]
@@ -125,27 +133,30 @@ namespace SecurityPe.Controllers
             var messages = new List<ReturnMessage>();
             
             _context.Messages.Where(m => m.ConversationId == model.ConversationID).ToList().ForEach(async me =>
-            {
-                var content = DecryptWithAes(me, receiver);
-                if (content.Equals(String.Empty))
                 {
-                    var sender = await FindByEmailAsync(model.SendersEmail);
-                    content = DecryptWithAes(me, sender);
+                    var content = DecryptWithAes(me, receiver);
+                        if (content.Equals(String.Empty))
+                        {
+                            var sender = await FindByEmailAsync(model.SendersEmail);
+                            content = DecryptWithAes(me, sender);
+                        }
+
+                        var rMessage = new ReturnMessage
+                        {
+                            MessageId = me.Id,
+                            Content = content,
+                            ConversationId = me.ConversationId,
+                            EmailOfSender = me.EmailOfSender,
+                            DataIsTrusted = EncryptionServices.VerifyData
+                            (content,
+                                _context.PublicKeyStores.FirstOrDefault(store => store.Email == me.EmailOfSender)
+                                    ?.PublicKey, me.SignedData)
+
+                        };
+
+                        messages.Add(rMessage);
+
                 }
-                var rMessage = new ReturnMessage
-                    {
-                        MessageId = me.Id,
-                        Content = content,
-                        ConversationId = me.ConversationId,
-                        EmailOfSender = me.EmailOfSender,
-                        DataIsTrusted = EncryptionServices.VerifyData
-                        (content, _context.PublicKeyStores.FirstOrDefault(store => store.Email == me.EmailOfSender)?.PublicKey, me.SignedData)
-
-                    };
-
-                messages.Add(rMessage);
-
-            }
             );
            
             return Ok(messages);
@@ -156,14 +167,10 @@ namespace SecurityPe.Controllers
         private static string DecryptWithAes(Message me, User user)
         {
             var key = EncryptionServices.DecryptWithRsa(me.EncryptedAesKey, user.PrivateKey);
-            var iv =Convert.FromBase64String(me.EncryptedAesIV); //EncryptionServices.DecryptWithRsa(me.EncryptedAesIV, user.PrivateKey);
+            var iv =Convert.FromBase64String(me.EncryptedAesIV);
             var decryptWithAes = EncryptionServices.DecryptWithAes(
-                Convert.FromBase64String(me.EncryptedContentOfMessage), key, iv);
-            if (decryptWithAes.Length == 0)
-            {
-                return String.Empty;
-            }
-            return decryptWithAes;
+            Convert.FromBase64String(me.EncryptedContentOfMessage), key, iv);
+            return decryptWithAes.Length == 0 ? string.Empty : decryptWithAes;
         }
 
         [HttpPost("{action}")]
@@ -179,6 +186,62 @@ namespace SecurityPe.Controllers
 
             return Ok(userConversations);
         }
+        [HttpPost("{action}")]
+        public async Task<IActionResult> StoreFile([FromBody] StoreFileModel model)
+        {
+            try
+            {
+                var storedFile = new StoredFile
+                {
+                    FilePath = model.filePath
+                };
+                _context.Conversations.Where(c => c.Id == model.ConversationId).FirstOrDefault()?.Files.Add(storedFile);
+                await _context.SaveChangesAsync();
+                
+                _logger.LogInformation($"The File {Path.GetFileName(model.filePath)} of conversation {model.ConversationId} is stored");
+                return Ok("FileStored");
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"The File {Path.GetFileName(model.filePath)} of conversation {model.ConversationId} couldn't be stored: {e.Message}");
+                return StatusCode(500, $"Internal server error: {e}");
+            }
+        }
+        [HttpPost("{action}")]
+        public async Task<IActionResult> SendFile([FromBody] MessageModel model)
+        {
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(model.SenderEmail);
+                _messageService.SendMessage(model.Message ,model.ReceiverEmail, user, model.ConversationId);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Internal server error: {e}");
+            }
+           
+        }
+
+        [HttpPost("{action}")]
+        public async Task<IActionResult> GetAllFilesOfCOnversation([FromBody] GetFilesModel model)
+        {
+            var files = _context.StoredFiles.Where(f => f.ConversationId == model.ConversationId).ToList();
+            var rFiles = new List<ReturnFile>();
+            files
+                .ForEach(f => rFiles.Add(new ReturnFile
+                {
+                    FileId = f.Id,
+                    FileName = Path.GetFileName(f.FilePath)
+                }));
+
+            return Ok(rFiles);
+        }
+
+       
+
 
         [HttpPost("{action}")]
         public async Task<IActionResult> UploadFile()
@@ -200,7 +263,8 @@ namespace SecurityPe.Controllers
                         file.CopyTo(stream);
                     }
 
-                    return Ok(new { fullPath });
+                    
+                    return Ok(fullPath);
                 }
                 else
                 {
@@ -212,6 +276,29 @@ namespace SecurityPe.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+        [HttpPost("{action}")]
+        public HttpResponseMessage GetFile([FromBody] DownloadFileModel model)
+        {
+            string filePath = _fileService.GetFilePathById(model.id);
+            string downloadedFileName = Path.GetFileName(filePath);
+
+            //converting Pdf file into bytes array  
+            var dataBytes = System.IO.File.ReadAllBytes(filePath);
+            //adding bytes to memory stream   
+            var dataStream = new MemoryStream(dataBytes);
+            var bufferedStream = new BufferedStream(dataStream);
+
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK);
+            httpResponseMessage.Content = new StreamContent(dataStream);
+            httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            httpResponseMessage.Content.Headers.ContentDisposition.FileName = downloadedFileName;
+            httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+
+            return httpResponseMessage;
+
+        }
+
 
         private async Task<User> FindByEmailAsync(string mail)
         {

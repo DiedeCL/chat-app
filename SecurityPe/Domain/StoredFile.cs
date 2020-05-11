@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace SecurityPe.Domain
 {
-    public class StoreFiles
+    public class StoredFile
     {
-        public string FileName { get; set; }
+        public string FilePath { get; set; }
         public int Id { get; set; }
+        public Conversation Conversation { get; set; }
+        public int ConversationId { get; set; }
     }
 }

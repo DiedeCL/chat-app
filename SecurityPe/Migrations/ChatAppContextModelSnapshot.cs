@@ -154,6 +154,9 @@ namespace SecurityPe.Migrations
                     b.Property<string>("EncryptedContentOfMessage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdOfFile")
+                        .HasColumnType("int");
+
                     b.Property<string>("SignedData")
                         .HasColumnType("nvarchar(max)");
 
@@ -209,6 +212,26 @@ namespace SecurityPe.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("SecurityPe.Domain.StoredFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.ToTable("StoredFiles");
                 });
 
             modelBuilder.Entity("SecurityPe.Domain.User", b =>
@@ -361,6 +384,15 @@ namespace SecurityPe.Migrations
                 {
                     b.HasOne("SecurityPe.Domain.Conversation", "Conversation")
                         .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SecurityPe.Domain.StoredFile", b =>
+                {
+                    b.HasOne("SecurityPe.Domain.Conversation", "Conversation")
+                        .WithMany("Files")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

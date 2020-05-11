@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,7 @@ namespace SecurityPe
             services.AddScoped(typeof(SqlConversationData), typeof(SqlConversationData));
             services.AddScoped(typeof(SqlUserKeyData), typeof(SqlUserKeyData));
             services.AddScoped(typeof(MessageService), typeof(MessageService));
+            services.AddScoped(typeof(FileService), typeof(FileService));
         }
 
 
